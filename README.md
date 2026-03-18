@@ -37,7 +37,7 @@ This reveals a **prompt-resistant metacognitive asymmetry**:
 
 ## Results Summary
 
-### Condition A - Baseline Prompt (Runs 1–3)
+### Condition A - Baseline Prompt (Runs 1-3)
 
 | Metric | Run 1 | Run 2 | Run 3 | Average |
 |--------|-------|-------|-------|---------|
@@ -48,7 +48,7 @@ This reveals a **prompt-resistant metacognitive asymmetry**:
 | Anti-Confab Score | 1.000 | 1.000 | 1.000 | **1.000** |
 | **Composite Score** | 0.8065 | 0.8152 | 0.8152 | **0.812** |
 
-### Condition B - Uncertainty-Pressured Prompt (Runs 4–6)
+### Condition B - Uncertainty-Pressured Prompt (Runs 4-6)
 
 | Metric | Run 4 | Run 5 | Run 6 | Average |
 |--------|-------|-------|-------|---------|
@@ -59,7 +59,7 @@ This reveals a **prompt-resistant metacognitive asymmetry**:
 | Anti-Confab Score | 0.972 | 0.972 | 0.972 | **0.972** |
 | **Composite Score** | 0.8069 | 0.8243 | 0.8156 | **0.816** |
 
-### Overall Average Composite Score: **0.814 — Excellent Metacognitive Ability**
+### Overall Average Composite Score: **0.814 - Excellent Metacognitive Ability**
 
 ---
 
