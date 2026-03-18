@@ -74,9 +74,9 @@ Composite = 0.40 × (1 − Brier Score)
 | Score Range | Interpretation |
 |-------------|---------------|
 | > 0.80 | Excellent metacognitive ability |
-| 0.60 – 0.80 | Good with identifiable gaps |
-| 0.40 – 0.60 | Moderate — significant calibration or confabulation issues |
-| < 0.40 | Poor — high confabulation or severe overconfidence |
+| 0.60 - 0.80 | Good with identifiable gaps |
+| 0.40 - 0.60 | Moderate - significant calibration or confabulation issues |
+| < 0.40 | Poor - high confabulation or severe overconfidence |
 
 ---
 
