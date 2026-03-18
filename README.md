@@ -1,13 +1,13 @@
 # Calibration Blindspot Benchmark (CBB)
 
 > **Google DeepMind & Kaggle Hackathon 2026**  
-> Track: Metacognition | Measuring Progress Toward AGI — Cognitive Abilities
+> Track: Metacognition | Measuring Progress Toward AGI - Cognitive Abilities
 
 ---
 
 ## What Is CBB?
 
-The Calibration Blindspot Benchmark measures whether frontier language models **know what they don't know** — a core metacognitive ability that standard benchmarks like MMLU completely ignore.
+The Calibration Blindspot Benchmark measures whether frontier language models **know what they don't know**, a core metacognitive ability that standard benchmarks like MMLU completely ignore.
 
 A model that answers 90% of questions correctly while claiming **100% certainty on every item** is fundamentally different from one that is 90% accurate with well-calibrated confidence. Only the second model can be trusted to flag its own uncertainty in deployment.
 
@@ -15,9 +15,9 @@ CBB isolates three causally distinct metacognitive sub-abilities:
 
 | Task | What It Measures |
 |------|-----------------|
-| **Task 1 — Confidence Calibration** | Does the model's stated confidence predict its actual accuracy? |
-| **Task 2 — Pre-Answer Error Forecasting** | Can the model predict its own failures *before* answering? |
-| **Task 3 — Confabulation Detection** | Does the model catch planted wrong answers, or rationalize them? |
+| **Task 1 - Confidence Calibration** | Does the model's stated confidence predict its actual accuracy? |
+| **Task 2 - Pre-Answer Error Forecasting** | Can the model predict its own failures *before* answering? |
+| **Task 3 - Confabulation Detection** | Does the model catch planted wrong answers, or rationalize them? |
 
 ---
 
@@ -25,19 +25,19 @@ CBB isolates three causally distinct metacognitive sub-abilities:
 
 Across **6 independent runs** under **2 prompt conditions**:
 
-- The model expressed **100% confidence on every single item** — regardless of difficulty
-- **Error Recall = 0.000 in all 6 runs** — the model never predicted it would get anything wrong, even under explicit uncertainty-pressure prompting
-- **Confabulation Detection = 0.972–1.000** — near-perfect at catching others' errors
+- The model expressed **100% confidence on every single item** - regardless of difficulty
+- **Error Recall = 0.000 in all 6 runs** - the model never predicted it would get anything wrong, even under explicit uncertainty-pressure prompting
+- **Confabulation Detection = 0.972-1.000** - near-perfect at catching others' errors
 
 This reveals a **prompt-resistant metacognitive asymmetry**:
 
-> *The model can diagnose what is wrong with someone else's answer but cannot see what is wrong with its own — even before it gives the answer.*
+> *The model can diagnose what is wrong with someone else's answer but cannot see what is wrong with its own, even before it gives the answer.*
 
 ---
 
 ## Results Summary
 
-### Condition A — Baseline Prompt (Runs 1–3)
+### Condition A - Baseline Prompt (Runs 1–3)
 
 | Metric | Run 1 | Run 2 | Run 3 | Average |
 |--------|-------|-------|-------|---------|
@@ -48,7 +48,7 @@ This reveals a **prompt-resistant metacognitive asymmetry**:
 | Anti-Confab Score | 1.000 | 1.000 | 1.000 | **1.000** |
 | **Composite Score** | 0.8065 | 0.8152 | 0.8152 | **0.812** |
 
-### Condition B — Uncertainty-Pressured Prompt (Runs 4–6)
+### Condition B - Uncertainty-Pressured Prompt (Runs 4–6)
 
 | Metric | Run 4 | Run 5 | Run 6 | Average |
 |--------|-------|-------|-------|---------|
@@ -144,4 +144,4 @@ Independent Researcher
 
 ---
 
-*Submitted to the Google DeepMind & Kaggle Hackathon: Measuring Progress Toward AGI — Cognitive Abilities, 2026*
+*Submitted to the Google DeepMind & Kaggle Hackathon: Measuring Progress Toward AGI, Cognitive Abilities, 2026*
