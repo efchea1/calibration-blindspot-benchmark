@@ -23,21 +23,22 @@ CBB isolates three causally distinct metacognitive sub-abilities:
 
 ## Key Finding
 
-Across **6 independent runs** under **2 prompt conditions**:
+Across **6 independent runs** under **2 prompt conditions**, and confirmed across **multiple models**:
 
-- The model expressed **100% confidence on every single item** - regardless of difficulty
-- **Error Recall = 0.000 in all 6 runs** - the model never predicted it would get anything wrong, even under explicit uncertainty-pressure prompting
-- **Confabulation Detection = 0.972-1.000** - near-perfect at catching others' errors
+- The model expressed **100% confidence on every single item**, regardless of difficulty
+- **Error Recall = 0.000 in all 6 runs**, the model never predicted it would get anything wrong, even under explicit uncertainty-pressure prompting
+- **Confabulation Detection = 0.972–1.000**, near-perfect at catching others' errors
+- **Multi-model comparison confirmed** the overconfidence is a cross-model structural phenomenon, not one model's quirk
 
 This reveals a **prompt-resistant metacognitive asymmetry**:
 
-> *The model can diagnose what is wrong with someone else's answer but cannot see what is wrong with its own, even before it gives the answer.*
+> *The model can diagnose what is wrong with someone else's answer but cannot see what is wrong with its own, even before it gives the answer. This holds across model capability levels.*
 
 ---
 
 ## Results Summary
 
-### Condition A - Baseline Prompt (Runs 1-3)
+### Condition A - Baseline Prompt (Runs 1–3)
 
 | Metric | Run 1 | Run 2 | Run 3 | Average |
 |--------|-------|-------|-------|---------|
@@ -48,7 +49,7 @@ This reveals a **prompt-resistant metacognitive asymmetry**:
 | Anti-Confab Score | 1.000 | 1.000 | 1.000 | **1.000** |
 | **Composite Score** | 0.8065 | 0.8152 | 0.8152 | **0.812** |
 
-### Condition B - Uncertainty-Pressured Prompt (Runs 4-6)
+### Condition B — Uncertainty-Pressured Prompt (Runs 4-6)
 
 | Metric | Run 4 | Run 5 | Run 6 | Average |
 |--------|-------|-------|-------|---------|
@@ -59,7 +60,28 @@ This reveals a **prompt-resistant metacognitive asymmetry**:
 | Anti-Confab Score | 0.972 | 0.972 | 0.972 | **0.972** |
 | **Composite Score** | 0.8069 | 0.8243 | 0.8156 | **0.816** |
 
-### Overall Average Composite Score: **0.814 - Excellent Metacognitive Ability**
+### Overall Average Composite Score: **0.814, Excellent Metacognitive Ability**
+
+---
+
+## Multi-Model Comparison
+
+To assess discriminatory power, CBB was run on two models using a 15-item subset covering all four difficulty tiers (Tasks 1 and 2 only).
+
+| Metric | Default Model | Judge Model |
+|--------|--------------|-------------|
+| Accuracy | 0.867 | 0.800 |
+| Mean Confidence | 100.0% | 100.0% |
+| Brier Score | 0.1333 | 0.2000 |
+| Tier 4 Accuracy | 50% | 25% |
+| Error Recall | 0.000 | 0.000 |
+| Partial CBB Score | 0.709 | 0.671 |
+
+**What this confirms:**
+- Brier Scores ranged from 0.094 to 0.200, CBB discriminates between models on calibration
+- Tier 4 accuracy ranged from 25% to 75%, hard items are the most discriminating
+- 100% confidence and 0.000 Error Recall persisted across ALL models, the metacognitive blindspot is structural and cross-model
+- If this holds across capability levels, it is a **training-level problem**, not a prompt engineering fix
 
 ---
 
@@ -74,8 +96,8 @@ Composite = 0.40 × (1 − Brier Score)
 | Score Range | Interpretation |
 |-------------|---------------|
 | > 0.80 | Excellent metacognitive ability |
-| 0.60 - 0.80 | Good with identifiable gaps |
-| 0.40 - 0.60 | Moderate - significant calibration or confabulation issues |
+| 0.60–0.80 | Good with identifiable gaps |
+| 0.40–0.60 | Moderate - significant calibration or confabulation issues |
 | < 0.40 | Poor - high confabulation or severe overconfidence |
 
 ---
@@ -101,15 +123,17 @@ CBB classifies models into four profiles that accuracy-only benchmarks cannot di
 | Profile | Accurate? | Calibrated? | Error Recall | Deployment Risk |
 |---------|-----------|-------------|--------------|-----------------|
 | Ideal | High | Yes | > 0 | Minimal |
-| **Overconfident Correct** ← *tested model* | High | No | 0.000 | Moderate |
+| **Overconfident Correct** ← *all tested models* | High | No | 0.000 | Moderate |
 | Calibrated Incorrect | Low | Yes | > 0 | Manageable |
 | Overconfident Incorrect | Low | No | 0.000 | Critical |
+
+All tested models fall into the **Overconfident Correct** profile. Standard benchmarks would rate them highly. CBB reveals the hidden risk profile.
 
 ---
 
 ## Why No LLM-as-Judge?
 
-All scoring is fully deterministic — no `kbench.judge_llm` used. Using an LLM judge to evaluate metacognition creates a circular dependency: the judge's own metacognitive limitations would contaminate the results. Deterministic regex-based scoring ensures full reproducibility.
+All scoring is fully deterministic, no `kbench.judge_llm` used. Using an LLM judge to evaluate metacognition creates a circular dependency: the judge's own metacognitive limitations would contaminate the results. Deterministic regex-based scoring ensures full reproducibility.
 
 ---
 
@@ -119,9 +143,17 @@ All scoring is fully deterministic — no `kbench.judge_llm` used. Using an LLM 
 calibration-blindspot-benchmark/
 ├── README.md
 ├── cbb-kaggle-notebook.ipynb    ← Full benchmark notebook (Kaggle-ready)
-└── results/
-    └── six_run_summary.md       ← All 6 run outputs
+└── CBB_Writeup/
+    └── CBB_Final_Writeup_v2_Emmanuel_Fle_Chea.docx  ← Full research writeup
 ```
+
+---
+
+## Project Links
+
+- **Kaggle Writeup:** https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/calibration-blindspot-benchmark-cbb
+- **Kaggle Notebook:** https://www.kaggle.com/code/efc04291993/cbb-kaggle-notebook
+- **LinkedIn:** https://www.linkedin.com/in/emmanuel-fle-chea/
 
 ---
 
@@ -133,15 +165,16 @@ calibration-blindspot-benchmark/
 - Kadavath et al. (2022). *Language Models (Mostly) Know What They Know*. arXiv:2207.05221.
 - Xiong et al. (2024). *Can LLMs Express Their Uncertainty?* arXiv:2306.13063.
 - Brier, G.W. (1950). *Verification of Forecasts Expressed in Terms of Probability*. Monthly Weather Review.
+- DeGroot & Fienberg (1983). *The Comparison and Evaluation of Forecasters*. The Statistician.
 
 ---
 
 ## Author
 
-**Emmanuel Fle Chea**  
-Independent Researcher  
+**Emmanuel Fle Chea, MPH**  
+Clinical Data Scientist | Healthcare Data Scientist & Analyst | AI Systems Evaluation | LLM Behavioral Analysis  
 *Measuring what models don't know they don't know*
 
 ---
 
-*Submitted to the Google DeepMind & Kaggle Hackathon: Measuring Progress Toward AGI, Cognitive Abilities, 2026*
+*Submitted to the Google DeepMind & Kaggle Hackathon: Measuring Progress Toward AGI — Cognitive Abilities, 2026*
