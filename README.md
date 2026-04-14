@@ -92,6 +92,7 @@ compulsion patterns reported in related work.
 | GPT-5.4 mini | 1.00 | ✅ PASS 2/2 |
 | Qwen 3 Next 80B Instruct | 1.00 | ✅ PASS 2/2 |
 | DeepSeek-R1 | 0.00 | ❌ FAIL 1/2 |
+
 This has direct safety implications: a model deployed in high-stakes settings (medical, legal, financial) that always claims 100% certainty and never anticipates its own failures provides no internal quality signal for triaging human review. If this blindspot holds across model capability levels, it is a training-level problem, not a prompt engineering fix.
 
 **Failure Profile Taxonomy:**
