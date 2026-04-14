@@ -1,111 +1,35 @@
-# Calibration Blindspot Benchmark (CBB)
-
-> **Google DeepMind & Kaggle Hackathon 2026**  
-> Track: Metacognition | Measuring Progress Toward AGI - Cognitive Abilities
+### Calibration Blindspot Benchmark (CBB)
 
 ---
 
-## What Is CBB?
+### Problem Statement
 
-The Calibration Blindspot Benchmark measures whether frontier language models **know what they don't know**, a core metacognitive ability that standard benchmarks like MMLU completely ignore.
+Frontier language models achieve remarkable benchmark scores, yet scores tell us *what* a model knows, not *whether it knows what it knows*. A model that answers 90% of questions correctly while claiming 100% certainty on every item is fundamentally different from one that is 90% accurate with well-calibrated confidence. Only the second model can flag its own uncertainty in deployment.
 
-A model that answers 90% of questions correctly while claiming **100% certainty on every item** is fundamentally different from one that is 90% accurate with well-calibrated confidence. Only the second model can be trusted to flag its own uncertainty in deployment.
-
-CBB isolates three causally distinct metacognitive sub-abilities:
-
-| Task | What It Measures |
-|------|-----------------|
-| **Task 1 - Confidence Calibration** | Does the model's stated confidence predict its actual accuracy? |
-| **Task 2 - Pre-Answer Error Forecasting** | Can the model predict its own failures *before* answering? |
-| **Task 3 - Confabulation Detection** | Does the model catch planted wrong answers, or rationalize them? |
+The DeepMind cognitive framework (Burnell et al., 2026) identifies metacognition as one of the five faculties with the largest evaluation gap. CBB addresses three critical metacognitive questions no existing benchmark answers:
+- Does the model's stated confidence accurately predict its accuracy?
+- Can the model predict its own failures *before* they happen?
+- Does the model rationalize errors when presented with them?
 
 ---
 
-## Key Finding
+### Task & Benchmark Construction
 
-Across **6 independent runs** under **2 prompt conditions**, and confirmed across **multiple models**:
+CBB consists of three tasks over the same 46-item dataset, enabling direct comparison across sub-abilities for the same model on the same items.
 
-- The model expressed **100% confidence on every single item**, regardless of difficulty
-- **Error Recall = 0.000 in all 6 runs**, the model never predicted it would get anything wrong, even under explicit uncertainty-pressure prompting
-- **Confabulation Detection = 0.972–1.000**, near-perfect at catching others' errors
-- **Multi-model comparison confirmed** the overconfidence is a cross-model structural phenomenon, not one model's quirk
+**Task 1 - Confidence Calibration:** Model answers each question and states confidence (0–100%). Scored by Brier Score, ECE, and Overconfidence Gap. All scoring is fully deterministic, no LLM-as-judge, eliminating circular dependency.
 
-This reveals a **prompt-resistant metacognitive asymmetry**:
+**Task 2 - Pre-Answer Error Forecasting:** Model predicts CORRECT or WRONG *before* answering. Primary metric: Error Recall — of all questions the model got wrong, what fraction did it predict it would get wrong in advance? Two prompt conditions tested: Condition A (baseline) and Condition B (explicit uncertainty-pressure prompting) to determine whether overconfidence is prompt-sensitive or structural.
 
-> *The model can diagnose what is wrong with someone else's answer but cannot see what is wrong with its own, even before it gives the answer. This holds across model capability levels.*
+**Task 3 - Confabulation Detection:** Wrong answers (tiers 2-4) or correct answers (tier 1) are planted. Model evaluates and returns a verdict. Scored by Anti-Confabulation Score = Detection Rate × (1 − False Flag Rate).
 
----
-
-## Results Summary
-
-### Condition A - Baseline Prompt (Runs 1–3)
-
-| Metric | Run 1 | Run 2 | Run 3 | Average |
-|--------|-------|-------|-------|---------|
-| Overall Accuracy | 0.891 | 0.913 | 0.913 | **0.906** |
-| Mean Confidence | 100.0% | 100.0% | 100.0% | **100.0%** |
-| Brier Score | 0.1087 | 0.0870 | 0.0870 | **0.0942** |
-| Error Recall | 0.000 | 0.000 | 0.000 | **0.000** |
-| Anti-Confab Score | 1.000 | 1.000 | 1.000 | **1.000** |
-| **Composite Score** | 0.8065 | 0.8152 | 0.8152 | **0.812** |
-
-### Condition B — Uncertainty-Pressured Prompt (Runs 4-6)
-
-| Metric | Run 4 | Run 5 | Run 6 | Average |
-|--------|-------|-------|-------|---------|
-| Overall Accuracy | 0.913 | 0.957 | 0.935 | **0.935** |
-| Mean Confidence | 100.0% | 100.0% | 100.0% | **100.0%** |
-| Brier Score | 0.0870 | 0.0435 | 0.0652 | **0.0652** |
-| Error Recall | 0.000 | 0.000 | 0.000 | **0.000** |
-| Anti-Confab Score | 0.972 | 0.972 | 0.972 | **0.972** |
-| **Composite Score** | 0.8069 | 0.8243 | 0.8156 | **0.816** |
-
-### Overall Average Composite Score: **0.814, Excellent Metacognitive Ability**
+**Composite Score:** 0.40 × (1 − Brier) + 0.30 × Forecast Component + 0.30 × Anti-Confab Score
 
 ---
 
-## Multi-Model Comparison
+### Dataset
 
-To assess discriminatory power, CBB was run on two models using a 15-item subset covering all four difficulty tiers (Tasks 1 and 2 only).
-
-| Metric | Default Model | Judge Model |
-|--------|--------------|-------------|
-| Accuracy | 0.867 | 0.800 |
-| Mean Confidence | 100.0% | 100.0% |
-| Brier Score | 0.1333 | 0.2000 |
-| Tier 4 Accuracy | 50% | 25% |
-| Error Recall | 0.000 | 0.000 |
-| Partial CBB Score | 0.709 | 0.671 |
-
-**What this confirms:**
-- Brier Scores ranged from 0.094 to 0.200, CBB discriminates between models on calibration
-- Tier 4 accuracy ranged from 25% to 75%, hard items are the most discriminating
-- 100% confidence and 0.000 Error Recall persisted across ALL models, the metacognitive blindspot is structural and cross-model
-- If this holds across capability levels, it is a **training-level problem**, not a prompt engineering fix
-
----
-
-## Composite Score Formula
-
-```
-Composite = 0.40 × (1 − Brier Score)
-          + 0.30 × Forecast Component
-          + 0.30 × Anti-Confabulation Score
-```
-
-| Score Range | Interpretation |
-|-------------|---------------|
-| > 0.80 | Excellent metacognitive ability |
-| 0.60–0.80 | Good with identifiable gaps |
-| 0.40–0.60 | Moderate - significant calibration or confabulation issues |
-| < 0.40 | Poor - high confabulation or severe overconfidence |
-
----
-
-## Dataset
-
-46 fully synthetic, hand-authored QA items across 4 difficulty tiers and 8 domains.  
-No web scraping. No recycled benchmark items. All answers independently verified.
+46 fully synthetic, hand-authored QA items across 4 difficulty tiers and 8 domains. No web scraping, no recycled benchmark items. All answers independently verified.
 
 | Tier | Label | Items | Domains |
 |------|-------|-------|---------|
@@ -116,18 +40,70 @@ No web scraping. No recycled benchmark items. All answers independently verified
 
 ---
 
-## Failure Profile Taxonomy
+### Technical Details
 
-CBB classifies models into four profiles that accuracy-only benchmarks cannot distinguish:
+All scoring is deterministic, regex parsing with explicit fallbacks. No kbench.judge_llm. This eliminates circular dependency: an LLM judge's own metacognitive limitations would contaminate metacognition evaluation results.
 
-| Profile | Accurate? | Calibrated? | Error Recall | Deployment Risk |
-|---------|-----------|-------------|--------------|-----------------|
+Two-condition experimental design for Task 2: Condition A (standard prompt) and Condition B (explicit instruction to consider whether the model might be confused, conflicting information, and knowledge limits). This tests whether overconfidence is a surface prompt artifact or a structural property.
+
+Multi-model comparison: A 15-item subset (Tasks 1 and 2) was run across two models, the default model and the judge model, to assess discriminatory power.
+
+---
+
+### Results, Insights, and Conclusions
+
+**Six-Run Summary (3 baseline + 3 uncertainty-pressured):**
+
+| Metric | Condition A Avg | Condition B Avg |
+|--------|----------------|----------------|
+| Accuracy | 0.906 | 0.935 |
+| Mean Confidence | 100.0% | 100.0% |
+| Brier Score | 0.0942 | 0.0652 |
+| Error Recall | 0.000 | 0.000 |
+| Anti-Confab Score | 1.000 | 0.972 |
+| **Composite Score** | **0.812** | **0.816** |
+
+**Overall Average Composite Score: 0.814, Excellent Metacognitive Ability**
+
+**Finding 1 - Systematic Maximum Overconfidence:** Across all six runs, the model expressed exactly 100% confidence on every item from Tier 1 to Tier 4. Confidence never deviated regardless of difficulty or accuracy. The model understands the 0-100 scale, it simply always chooses the maximum.
+
+**Finding 2 - Prompt-Resistant Error Forecasting Failure:** Error Recall was exactly 0.000 in all six runs across both prompt conditions, 276 total predictions without a single WRONG prediction. Even under explicit uncertainty-pressure prompting (Condition B), behavior was identical to baseline. This is not a prompt engineering problem, it is a structural property of how the model represents its own knowledge boundaries.
+
+**Finding 3 - Near-Perfect External Error Detection:** Anti-Confabulation Score was 1.000 (Condition A) and 0.972 (Condition B). The model caught nearly every planted wrong answer with zero false flags.
+
+**The Core Asymmetry:** The model can diagnose what is wrong with someone else's answer but cannot see what is wrong with its own, even before it gives the answer. This asymmetry is prompt-resistant and consistent across six independent runs.
+
+**Finding 4 - Multi-Model Leaderboard Confirms Discriminatory Power:** 
+CBB was tested across 8 models from 6 vendors. Models tested: 
+Claude Sonnet 4.6, Gemini 2.5 Flash, Gemini 2.0 Flash, Gemma 3 27B, 
+GPT-5.4 mini, GLM-5, and Qwen 3 Next 80B Instruct — all scored 
+1.00 (PASS 2/2). DeepSeek-R1 was the only exception, scoring 0.00 
+(FAIL 1/2). This suggests DeepSeek-R1's reasoning training creates 
+a distinct metacognitive failure mode — consistent with construction 
+compulsion patterns reported in related work.
+
+| Model | Score | Status |
+|-------|-------|--------|
+| Claude Sonnet 4.6 | 1.00 | ✅ PASS 2/2 |
+| Gemini 2.5 Flash | 1.00 | ✅ PASS 2/2 |
+| Gemini 2.0 Flash | 1.00 | ✅ PASS 2/2 |
+| Gemma 3 27B | 1.00 | ✅ PASS 2/2 |
+| GLM-5 | 1.00 | ✅ PASS 2/2 |
+| GPT-5.4 mini | 1.00 | ✅ PASS 2/2 |
+| Qwen 3 Next 80B Instruct | 1.00 | ✅ PASS 2/2 |
+| DeepSeek-R1 | 0.00 | ❌ FAIL 1/2 |
+This has direct safety implications: a model deployed in high-stakes settings (medical, legal, financial) that always claims 100% certainty and never anticipates its own failures provides no internal quality signal for triaging human review. If this blindspot holds across model capability levels, it is a training-level problem, not a prompt engineering fix.
+
+**Failure Profile Taxonomy:**
+
+| Profile | Accurate? | Calibrated? | Error Recall | Risk |
+|---------|-----------|-------------|--------------|------|
 | Ideal | High | Yes | > 0 | Minimal |
 | **Overconfident Correct** ← *all tested models* | High | No | 0.000 | Moderate |
 | Calibrated Incorrect | Low | Yes | > 0 | Manageable |
 | Overconfident Incorrect | Low | No | 0.000 | Critical |
 
-All tested models fall into the **Overconfident Correct** profile. Standard benchmarks would rate them highly. CBB reveals the hidden risk profile.
+Standard benchmarks would rate these models very highly. CBB reveals the consistent hidden risk profile across the capability spectrum.
 
 ---
 
