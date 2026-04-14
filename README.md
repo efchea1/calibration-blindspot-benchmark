@@ -5,7 +5,6 @@
 📖 **[How to Use CBB →](HOW_TO_USE.md)** | 🏆 **[Kaggle Benchmark →](https://www.kaggle.com/benchmarks/efc04291993/calibration-blindspot-benchmark)** | 📝 **[Writeup →](https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/calibration-blindspot-benchmark-cbb)**
 
 ---
----
 
 ### Problem Statement
 
