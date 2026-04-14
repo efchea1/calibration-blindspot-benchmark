@@ -1,5 +1,10 @@
-### Calibration Blindspot Benchmark (CBB)
+# Calibration Blindspot Benchmark (CBB)
 
+> **Measuring what models don't know they don't know**
+
+📖 **[How to Use CBB →](HOW_TO_USE.md)** | 🏆 **[Kaggle Benchmark →](https://www.kaggle.com/benchmarks/efc04291993/calibration-blindspot-benchmark)** | 📝 **[Writeup →](https://www.kaggle.com/competitions/kaggle-measuring-agi/writeups/calibration-blindspot-benchmark-cbb)**
+
+---
 ---
 
 ### Problem Statement
@@ -118,10 +123,11 @@ All scoring is fully deterministic, no `kbench.judge_llm` used. Using an LLM jud
 
 ```
 calibration-blindspot-benchmark/
-├── README.md
-├── cbb-kaggle-notebook.ipynb    ← Full benchmark notebook (Kaggle-ready)
+├── README.md                          ← Overview and results
+├── HOW_TO_USE.md                      ← Practical guide for running CBB
+├── cbb-kaggle-notebook.ipynb          ← Full benchmark notebook (Kaggle-ready)
 └── CBB_Writeup/
-    └── CBB_Final_Writeup_v2_Emmanuel_Fle_Chea.docx  ← Full research writeup
+    └── CBB_Final_Writeup_v2_Emmanuel_Fle_Chea.pdf  ← Full research writeup
 ```
 
 ---
