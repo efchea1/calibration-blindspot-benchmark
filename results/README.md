@@ -10,7 +10,7 @@ Standard prompt asking the model to answer and state confidence.
 **Condition B - Uncertainty-Pressured (Runs 4-6)**
 Explicit instruction to consider whether the model might be 
 confused, have conflicting information, or be at the limits 
-of its knowledge — before predicting and answering.
+of its knowledge, before predicting and answering.
 
 ## Files
 
