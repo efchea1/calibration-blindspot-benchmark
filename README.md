@@ -125,6 +125,8 @@ calibration-blindspot-benchmark/
 ├── README.md                          ← Overview and results
 ├── HOW_TO_USE.md                      ← Practical guide for running CBB
 ├── cbb-kaggle-notebook.ipynb          ← Full benchmark notebook (Kaggle-ready)
+├── results/
+│   └── CBB_Results_All_Six_Runs.pdf   ← All 6 runs: Condition A (baseline) + Condition B (uncertainty-pressured)
 └── CBB_Writeup/
     └── CBB_Final_Writeup_v2_Emmanuel_Fle_Chea.pdf  ← Full research writeup
 ```
