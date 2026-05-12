@@ -80,10 +80,10 @@ Multi-model comparison: A 15-item subset (Tasks 1 and 2) was run across two mode
 **Finding 4 - Multi-Model Leaderboard Confirms Discriminatory Power:** 
 CBB was tested across 8 models from 6 vendors. Models tested: 
 Claude Sonnet 4.6, Gemini 2.5 Flash, Gemini 2.0 Flash, Gemma 3 27B, 
-GPT-5.4 mini, GLM-5, and Qwen 3 Next 80B Instruct — all scored 
+GPT-5.4 mini, GLM-5, and Qwen 3 Next 80B Instruct, all scored 
 1.00 (PASS 2/2). DeepSeek-R1 was the only exception, scoring 0.00 
 (FAIL 1/2). This suggests DeepSeek-R1's reasoning training creates 
-a distinct metacognitive failure mode — consistent with construction 
+a distinct metacognitive failure mode, consistent with construction 
 compulsion patterns reported in related work.
 
 | Model | Score | Status |
