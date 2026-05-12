@@ -21,9 +21,9 @@ The DeepMind cognitive framework (Burnell et al., 2026) identifies metacognition
 
 CBB consists of three tasks over the same 46-item dataset, enabling direct comparison across sub-abilities for the same model on the same items.
 
-**Task 1 - Confidence Calibration:** Model answers each question and states confidence (0–100%). Scored by Brier Score, ECE, and Overconfidence Gap. All scoring is fully deterministic, no LLM-as-judge, eliminating circular dependency.
+**Task 1 - Confidence Calibration:** Model answers each question and states confidence (0-100%). Scored by Brier Score, ECE, and Overconfidence Gap. All scoring is fully deterministic, no LLM-as-judge, eliminating circular dependency.
 
-**Task 2 - Pre-Answer Error Forecasting:** Model predicts CORRECT or WRONG *before* answering. Primary metric: Error Recall — of all questions the model got wrong, what fraction did it predict it would get wrong in advance? Two prompt conditions tested: Condition A (baseline) and Condition B (explicit uncertainty-pressure prompting) to determine whether overconfidence is prompt-sensitive or structural.
+**Task 2 - Pre-Answer Error Forecasting:** Model predicts CORRECT or WRONG *before* answering. Primary metric: Error Recall - of all questions the model got wrong, what fraction did it predict it would get wrong in advance? Two prompt conditions tested: Condition A (baseline) and Condition B (explicit uncertainty-pressure prompting) to determine whether overconfidence is prompt-sensitive or structural.
 
 **Task 3 - Confabulation Detection:** Wrong answers (tiers 2-4) or correct answers (tier 1) are planted. Model evaluates and returns a verdict. Scored by Anti-Confabulation Score = Detection Rate × (1 − False Flag Rate).
 
