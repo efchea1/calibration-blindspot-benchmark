@@ -143,13 +143,13 @@ calibration-blindspot-benchmark/
 
 ## References
 
-- Burnell et al. (2026). *Measuring Progress Toward AGI: A Cognitive Framework*. Google DeepMind.
 - Morris et al. (2024). *Levels of AGI for Operationalizing Progress on the Path to AGI*. ICML 2024. arXiv:2311.02462.
 - Guo et al. (2017). *On Calibration of Modern Neural Networks*. ICML 2017.
 - Kadavath et al. (2022). *Language Models (Mostly) Know What They Know*. arXiv:2207.05221.
 - Xiong et al. (2024). *Can LLMs Express Their Uncertainty?* arXiv:2306.13063.
 - Brier, G.W. (1950). *Verification of Forecasts Expressed in Terms of Probability*. Monthly Weather Review.
 - DeGroot & Fienberg (1983). *The Comparison and Evaluation of Forecasters*. The Statistician.
+- Burnell, R. et al. (2026). *Measuring Progress Toward AGI: A Cognitive Framework.* Google DeepMind Technical Framework (pre‑publication).
 
 ---
 
@@ -161,4 +161,4 @@ Clinical Data Scientist | Healthcare Data Scientist & Analyst | AI Systems Evalu
 
 ---
 
-*Submitted to the Google DeepMind & Kaggle Hackathon: Measuring Progress Toward AGI — Cognitive Abilities, 2026*
+*Submitted to the Google DeepMind & Kaggle Hackathon: Measuring Progress Toward AGI - Cognitive Abilities, 2026*
